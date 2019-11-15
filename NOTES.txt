@@ -47,9 +47,11 @@ URL: "https://www.youtube.com/watch?v=qj2oDkvc4dQ"
     A. ==> npm install --save-dev dotenv
     B. Create a ".env" file in ROOT Directory.
 10. Initialize Git Repository for Project:
-    A. ==> git init
-    B. Create a ".gitignore" file to declare all files and directories that DO NOT want be included
-       by Git when saving project to repository.
+    A. ==> git init (Create an empty Git repository or reinitialize an existing one)
+    B. Create a ".gitignore" file to declare all files and directories that DO NOT want be 
+       included when saving project to repository.
+    C. ==> 'git add .' (Add file contents to the index)
+    D. ==> git commit -m "Commit-Comment" (Record changes to the repository)
 
 
 
