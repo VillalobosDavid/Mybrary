@@ -12,7 +12,13 @@ LOCAL-PC ==> GitHub Server ==> Heroku Server ==> MongoDB Server
 Project Setup - Node.js/Express/MongoDB Course #1:
 URL: "https://www.youtube.com/watch?v=qj2oDkvc4dQ"
 **********************************************************************************
-
+In this video we will be setting up the base of our project by:
+1. Setting up Express
+2. Hooking up MongoDB
+3. Setting up local ENV variables
+4. Creating a base layout HTML file
+5. Setting up our MVC folder structure
+**********************************************************************************
 01. Initialize Project:
     A. ==> init npm
 02. Install Required Packages:
@@ -102,6 +108,15 @@ URL: "https://www.youtube.com/watch?v=qj2oDkvc4dQ"
 Author's Index/Create/New Routes - Node.js/Express/MongoDB Course #2
 URL: "https://www.youtube.com/watch?v=esy4nRuShl8"
 **********************************************************************************
+In this video we will be setting up the author's Index/Create/New routes. To do this 
+we will need to:
+1. Create an author model
+2. Create an author controller
+3. Create author views
+4. Interact with our database to find and create authors
+5. Handle validation errors
+6. Setup a shared page header
+**********************************************************************************
 01. Explanation of Project Files:
     A. "routes/author.js":          Where all AUTHOR application routes get defined.
     B. "views/partials/header.ejs": Partial View for HEADER HTML of ALL Views.
@@ -112,5 +127,47 @@ URL: "https://www.youtube.com/watch?v=esy4nRuShl8"
     A. ==> npm install body-parser
        I. Node.js body parsing middleware.  Parse incoming request bodies in a middleware 
           before your handlers, available under the req.body property.
+03. Commit Changes to GitHub (Might need to sign in to GitHub account):
+    A. ==> 'git add .'
+    B. ==> git commit -m "Initial Author Routes"
+    C. ==> git push
+04. Push new version of application to Heroku:
+    A. ==> git push heroku master
+05. Whitelist your connection IP address in MongoDB website
+    A. Access "Network Access" for database
+    B. Add an IP Address 
+       I. 0.0.0/0 (Opened to all IP Addresses)
+06. Restart all dynos in Heroku server:
+    A. Access "More" ==> "Restart all dynos"
+
+**********************************************************************************
+Books Index/Create/New Routes - Node.js/Express/MongoDB Course #3
+URL: "https://www.youtube.com/watch?v=Zi2UwhpooF8"
+**********************************************************************************
+In this video we will be setting up the book's Index/Create/New routes. To do this 
+we will need to:
+1. Create a book model
+2. Create a book controller
+3. Create book views
+4. Interact with our database to find and create books
+5. Handle validation errors
+6. Setup file upload
+7. Store uploaded files
+**********************************************************************************
+01. Explanation of Project Files:
+    A. "routes/book.js":            Where all book application routes get defined.
+    B. "views/partials/header.ejs": Partial View for HEADER HTML of ALL Views.
+    C. "views/books/index.ejs":     View for ALL Books.
+    D. "views/books/new.ejs":       View for SINGLE Books.
+    E. "models/book.js":            Model (Database Schema) for Books.
+02. Install "multer" Package:
+    A. ==> npm install multer
+       I. Multer is a node.js middleware for handling multipart/form-data, which is primarily 
+          used for uploading files. It is written on top of busboy for maximum efficiency.
+          NOTE: Multer will not process any form which is not multipart (multipart/form-data).
+03. Commit Changes to GitHub (Might need to sign in to GitHub account):
+    A. ==> 'git add .'
+    B. ==> git commit -m "Initial Author Routes"
+    C. ==> git push
 
 

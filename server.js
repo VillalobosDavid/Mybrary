@@ -22,6 +22,8 @@ const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index');
 // Referencing AUTHORS Routes
 const authorsRouter = require('./routes/authors');
+// Referencing BOOKS Routes
+const booksRouter = require('./routes/books');
 
 // Create Express Application Object
 const app = express();
@@ -61,10 +63,12 @@ db.once('open', () => {
 	console.log('Connected to Mongoose Database.');
 });
 
-// Referencing the REQUESTS of DEFAULT Routers
+// Routing DEFAULT REQUESTS
 app.use('/', indexRouter);
-// Referencing the REQUESTS of AUTHORS Routers
+// Routing AUTHORS REQUESTS
 app.use('/authors', authorsRouter);
+// Routing BOOKS REQUESTS
+app.use('/books', booksRouter);
 
 // Starting Server and Defining Listening Port
 // "process.env.PORT" for Production
