@@ -1,3 +1,6 @@
+// Development: "DATABASE_URL" comes from ".env" file and database is pointing to local database.
+// Production (Heroku): "DATABASE_URL" comes from server's configuration variables and database
+//                      is pointing to MongoDB database.
 if (process.env.NODE_ENV !== 'production') {
 	// NOT WORKING...
 	// require('dotenv').parse();
@@ -11,8 +14,14 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express');
 // Layout support for "ejs" (Embedded JavaScript templates) in express
 const expressLayouts = require('express-ejs-layouts');
-// Referencing the "index.js" Routes File
+// Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+const bodyParser = require('body-parser');
+
+// REFERENCING ROUTERS
+// Referencing DEFAULT Routes
 const indexRouter = require('./routes/index');
+// Referencing AUTHORS Routes
+const authorsRouter = require('./routes/authors');
 
 // Create Express Application Object
 const app = express();
@@ -26,6 +35,13 @@ app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 // Instructing Express Application to USE the Defined Location of All Public Files
 app.use(express.static('public'));
+// Instructing Express Application to USE the "body-parser" Package to Parse ALL REQUESTS
+app.use(
+	bodyParser.urlencoded({
+		limit    : '10mb',
+		extended : false
+	})
+);
 
 // Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.
 // Mongoose supports both promises and callbacks.
@@ -45,8 +61,10 @@ db.once('open', () => {
 	console.log('Connected to Mongoose Database.');
 });
 
-// Referencing the GET REQUEST of "index.js" Router File
+// Referencing the REQUESTS of DEFAULT Routers
 app.use('/', indexRouter);
+// Referencing the REQUESTS of AUTHORS Routers
+app.use('/authors', authorsRouter);
 
 // Starting Server and Defining Listening Port
 // "process.env.PORT" for Production
