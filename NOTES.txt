@@ -224,7 +224,7 @@ In this video we will be improving the file upload process by:
     A. ==> npm uninstall multer
 03. Commit Changes to GitHub (Might need to sign in to GitHub account):
     A. ==> 'git add .'
-    B. ==> git commit -m "Books Create/Index/New"
+    B. ==> git commit -m "File Upload Database"
     C. ==> git push
 04. Push new version of application to Heroku:
     A. ==> git push heroku master
