@@ -2,10 +2,6 @@
 // Mongoose supports both promises and callbacks.
 const mongoose = require('mongoose');
 
-// Path to place book cover images
-const coverImageBasePath = 'upload/bookCovers';
-const path = require('path');
-
 // Database Schema for Books
 const bookSchema = new mongoose.Schema({
 	title          : {
@@ -28,7 +24,11 @@ const bookSchema = new mongoose.Schema({
 		required : true,
 		default  : Date.now
 	},
-	coverImageName : {
+	coverImage     : {
+		type     : Buffer,
+		required : true
+	},
+	coverImageType : {
 		type     : String,
 		required : true
 	},
@@ -39,12 +39,13 @@ const bookSchema = new mongoose.Schema({
 	}
 });
 
-// Returning the virtual path of the book cover image
+// Returning an IMAGE OBJECT
 // NOTE: Using "function" instead of "=>" arrow function because
 //       need access to "this" object.
 bookSchema.virtual('coverImagePath').get(function() {
-	if (this.coverImageName != null) {
-		return path.join('/', coverImageBasePath, this.coverImageName);
+	if (this.coverImage != null && this.coverImageType != null) {
+		return `data:${this.coverImageType};charset:utf-8;base64,
+		        ${this.coverImage.toString('base64')}`;
 	}
 });
 
@@ -52,6 +53,3 @@ bookSchema.virtual('coverImagePath').get(function() {
 // "Book":       Name of Table in MongoDB
 // "bookSchema": Table Schema for Books
 module.exports = mongoose.model('Book', bookSchema);
-
-// Exporting the "coverImageBasePath" constant
-module.exports.coverImageBasePath = coverImageBasePath;

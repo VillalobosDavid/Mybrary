@@ -167,7 +167,71 @@ we will need to:
           NOTE: Multer will not process any form which is not multipart (multipart/form-data).
 03. Commit Changes to GitHub (Might need to sign in to GitHub account):
     A. ==> 'git add .'
-    B. ==> git commit -m "Initial Author Routes"
+    B. ==> git commit -m "Books Create/Index/New"
     C. ==> git push
+04. Push new version of application to Heroku:
+    A. ==> git push heroku master
+05. SPECIAL NOTE:
+    A. In Heroku server all uploaded images get deleted after dynos get restarted.
+       In following tutorial will address and fix the issue.
+
+**********************************************************************************
+File Upload Setup - Node.js/Express/MongoDB Course #4
+URL: "https://www.youtube.com/watch?v=Xm5MzWvklbI"
+**********************************************************************************
+In this video we will be improving the file upload process by:
+1. Implementing FilePond
+2. Adding a file upload preview
+3. Implementing drag and drop upload
+4. Storing files in the database for Heroku
+**********************************************************************************
+01. Using FilePond: A JavaScript library that can upload anything you throw at it, 
+    optimizes images for faster uploads, and offers a great, accessible, silky smooth 
+    user experience. URL: "https://github.com/pqina/filepond"
+    A. Access "https://pqina.nl/filepond/docs/patterns/installation/" for "FilePond" 
+       installation instructions.
+       I.   CSS library:        <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+       II.  JavaScript library: <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
+       III. Access libraries in "layouts/layout.ejs" file.
+       IV.  NOTE: Make sure "FilePond" JavaScript library is the last one defined in 
+                  the HTML file, after plugins javascript libraries (VERY IMPORTANT).
+    B. Access "https://pqina.nl/filepond/docs/patterns/plugins/file-encode/" for 
+       "File Encode" Plugin installation instructions.
+       I.   JavaScript library: <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+       II.  Access library in "layouts/layout.ejs" file.
+    C. Access "https://pqina.nl/filepond/docs/patterns/plugins/image-preview/" for 
+       "Image Preview" Plugin installation instructions.
+       I.   CSS library:        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+       II.  JavaScript library: <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+       III. Access libraries in "layouts/layout.ejs" file.
+    D. Access "https://pqina.nl/filepond/docs/patterns/plugins/image-resize/" for 
+       "Image Resize" Plugin installation instructions.
+       I.   JavaScript library: <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+       II.  Access libraries in "layouts/layout.ejs" file.
+    E. Add "filepond" class to all elements that you want to be parsed by "FilePond" library:
+       I.   Example: "<input type="file" class='filepond'>"
+    F. Access "https://pqina.nl/filepond/docs/patterns/api/filepond-instance/" for 
+       Instructions on how to change the STYLE of "FilePond" drop area:
+       I.   "stylePanelAspectRatio": Set a forced aspect ratio for the FilePond drop 
+            area. Useful to make the drop area take up a fixed amount of space. For 
+            example when cropping a single square image. Accepts human readable aspect 
+            ratios like '1:1' or numeric aspect ratios like 0.75.
+       II.  "imageResizeTargetWidth": The output width in pixels, if null will use value 
+            of imageResizeTargetHeight
+       III. "imageResizeTargetHeight": The output height in pixels, if null will use 
+            value of imageResizeTargetWidth
+02. Uninstall "multer" Package, no longer used:
+    A. ==> npm uninstall multer
+03. Commit Changes to GitHub (Might need to sign in to GitHub account):
+    A. ==> 'git add .'
+    B. ==> git commit -m "Books Create/Index/New"
+    C. ==> git push
+04. Push new version of application to Heroku:
+    A. ==> git push heroku master
+
+
+
+
+
 
 
