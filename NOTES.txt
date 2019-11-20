@@ -239,7 +239,7 @@ In this video we will be improving the file upload process by:
 
 **********************************************************************************
 Authors Show/Edit/Update/Delete Routes - Node.js/Express/MongoDB Course #5
-URL: "https://www.youtube.com/watch?v=UIf1Lh9OZ-k&list=PLZlA0Gpn_vH8jbFkBjOuFjhxANC63OmXM&index=10&t=0s"
+URL: "https://youtu.be/UIf1Lh9OZ-k"
 **********************************************************************************
 In this video we will be setting up the author's Show/Edit/Update/Delete routes. To do this 
 we will need to:
@@ -262,4 +262,21 @@ we will need to:
 03. Push new version of application to Heroku:
     A. ==> git push heroku master
           
-
+**********************************************************************************
+Finish Backend - Node.js/Express/MongoDB Course #6
+URL: "https://www.youtube.com/watch?v=GtTolway2H0"
+**********************************************************************************
+In this video we will be finishing the backed of the project by setting up the book's 
+Show/Edit/Update/Delete routes. To do this we will need to:
+1. Add routes to the book's controller
+2. Add views for the book's views
+3. Interact with our database to update and delete books
+4. Finish the navigation for books in our views
+5. Polish our backend code and views
+**********************************************************************************
+01. Commit Changes to GitHub (Might need to sign in to GitHub account):
+    A. ==> 'git add .'
+    B. ==> git commit -m "Finished Book Routes"
+    C. ==> git push
+02. Push new version of application to Heroku:
+    A. ==> git push heroku master

@@ -9,7 +9,7 @@ const Book = require('../models/book');
 // Type of image files accepted by upload
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
-// GET: ALL BOOKS ROUTE (/books)
+// GET (RETRIEVE): ALL BOOKS ROUTE (/books)
 router.get('/', async (req, res) => {
 	// Obtaining the Query Statement, NOT running the query.
 	let query = Book.find();
@@ -35,12 +35,35 @@ router.get('/', async (req, res) => {
 	}
 });
 
-// GET: SINGLE BOOK ROUTE (/books/new)
+// GET (RETRIEVE): SINGLE BOOK ROUTE (/books/new)
 router.get('/new', async (req, res) => {
 	renderNewPage(res, new Book());
 });
 
-// POST: CREATE NEW BOOKS ROUTE (/books)
+// GET (RETRIEVE): SINGLE BOOK ROUTE (/books/##)
+router.get('/:id', async (req, res) => {
+	try {
+		// Get the Book record and populate Author record as well.
+		const book = await Book.findById(req.params.id).populate('author').exec();
+		res.render('books/show', {
+			book : book
+		});
+	} catch (error) {
+		res.redirect('/');
+	}
+});
+
+// GET (RETRIEVE): SINGLE BOOK ROUTE (/books/##)
+router.get('/:id/edit', async (req, res) => {
+	try {
+		const book = await Book.findById(req.params.id);
+		renderEditPage(res, book);
+	} catch (error) {
+		res.redirect('/');
+	}
+});
+
+// POST (CREATE): CREATE NEW BOOKS ROUTE (/books)
 router.post('/', async (req, res) => {
 	const book = new Book({
 		title       : req.body.title,
@@ -55,26 +78,86 @@ router.post('/', async (req, res) => {
 
 	try {
 		const newBook = await book.save();
-		// res.redirect(`books/${newBook.id}`);
-		res.redirect('books');
+		res.redirect(`/books/${newBook.id}`);
 	} catch (error) {
 		renderNewPage(res, book, true);
 	}
 });
 
+// PUT (UPDATE): CREATE NEW BOOKS ROUTE (/books)
+router.put('/:id', async (req, res) => {
+	let book;
+	try {
+		book = await Book.findById(req.params.id);
+		book.title = req.body.title;
+		book.author = req.body.author;
+		book.publishDate = new Date(req.body.publishDate);
+		book.pageCount = req.body.pageCount;
+		book.description = req.body.description;
+
+		if (req.body.cover != null && req.body.cover !== '') {
+			// Save image (BUFFER base64) and its type to database schema
+			saveCover(book, req.body.cover);
+		}
+
+		await book.save();
+		res.redirect(`/books/${book.id}`);
+	} catch (error) {
+		if (book != null) {
+			renderEditPage(res, book, true);
+		} else {
+			redirect('/');
+		}
+	}
+});
+
+// DELETE (DELETE): SINGLE BOOK ROUTE (/books/##)
+router.delete('/:id', async (req, res) => {
+	let book;
+	try {
+		book = await Book.findById(req.params.id);
+		await book.remove();
+		res.redirect('/books');
+	} catch (error) {
+		if (book == null) {
+			// Book Record NOT FOUND
+			res.redirect('/');
+		} else {
+			// Problem Deleting Book Record
+			res.render('books/show', {
+				book         : book,
+				errorMessage : 'Could NOT remove book'
+			});
+		}
+	}
+});
+
 async function renderNewPage(res, book, hasError = false) {
+	renderFormPage(res, book, 'new', hasError);
+}
+
+async function renderEditPage(res, book, hasError = false) {
+	renderFormPage(res, book, 'edit', hasError);
+}
+
+async function renderFormPage(res, book, form, hasError = false) {
 	try {
 		const authors = await Author.find({});
 		const params = {
 			authors : authors,
 			book    : book
 		};
+
 		if (hasError) {
-			params.errorMessage = 'Error Creating Book';
+			if (form === 'edit') {
+				params.errorMessage = 'Error Updating Book';
+			} else {
+				params.errorMessage = 'Error Creating Book';
+			}
 		}
-		res.render('books/new', params);
+		res.render(`books/${form}`, params);
 	} catch (error) {
-		res.redirect('books');
+		res.redirect('/books');
 	}
 }
 
