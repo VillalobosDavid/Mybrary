@@ -3,8 +3,10 @@ const express = require('express');
 const router = express.Router();
 // Referencing the "Model" object for Authors
 const Author = require('../models/author');
+// Referencing the "Model" object for Books
+const Book = require('../models/book');
 
-// GET: ALL AUTHORS ROUTE (/authors)
+// GET (RETRIEVE): ALL AUTHORS ROUTE (/authors)
 router.get('/', async (req, res) => {
 	let searchOptions = {};
 	if (req.query.name != null && req.query.name != '') {
@@ -21,7 +23,7 @@ router.get('/', async (req, res) => {
 	}
 });
 
-// GET: SINGLE AUTHOR ROUTE (/authors/new)
+// GET (RETRIEVE): NEW AUTHOR ROUTE (/authors/new)
 router.get('/new', (req, res) => {
 	res.render('authors/new', {
 		author       : new Author(),
@@ -29,38 +31,89 @@ router.get('/new', (req, res) => {
 	});
 });
 
-// POST: CREATE NEW AUTHOR ROUTE (/authors)
+// GET (RETRIEVE): SINGLE AUTHOR ROUTE (/authors/##)
+router.get('/:id', async (req, res) => {
+	try {
+		// Get the Author record
+		const author = await Author.findById(req.params.id);
+		// Get the Book record(s) for the Author, if available.
+		const books = await Book.find({ author: author.id }).limit(6).exec();
+		res.render('authors/show', {
+			author        : author,
+			booksByAuthor : books
+		});
+	} catch (error) {
+		res.redirect('/');
+	}
+});
+
+// GET (RETRIEVE): SINGLE AUTHOR ROUTE (/authors/##/edit)
+router.get('/:id/edit', async (req, res) => {
+	try {
+		const author = await Author.findById(req.params.id);
+		res.render('authors/edit', {
+			author : author
+		});
+	} catch (error) {
+		res.redirect('/authors');
+	}
+});
+
+// POST (CREATE): NEW AUTHOR ROUTE (/authors)
 router.post('/', async (req, res) => {
-	const authorRecord = new Author({
+	const author = new Author({
 		name : req.body.name
 	});
 
 	try {
-		const newAuthor = await authorRecord.save();
-		// res.redirect(`authors/${newAuthor.id}`);
-		res.redirect('authors');
+		const newAuthor = await author.save();
+		res.redirect(`authors/${newAuthor.id}`);
 	} catch (error) {
 		res.render('authors/new', {
-			author       : authorRecord,
-			errorMessage : 'Error Creating Author'
+			author       : author,
+			errorMessage : 'Error creating Author'
 		});
 	}
+});
 
-	// OLD WAY OF DOING IT
-	// authorRecord.save((err, newAuthor) => {
-	// 	if (err) {
-	// 		res.render('authors/new', {
-	// 			author       : authorRecord,
-	// 			errorMessage : 'Error Creating Author'
-	// 		});
-	// 	} else {
-	// 		// res.redirect(`authors/${newAuthor.id}`);
-	// 		res.redirect('authors');
-	// 	}
-	// });
+// PUT (UPDATE): SINGLE AUTHOR ROUTE (/authors/##)
+router.put('/:id', async (req, res) => {
+	let author;
+	try {
+		author = await Author.findById(req.params.id);
+		author.name = req.body.name;
+		await author.save();
+		res.redirect(`/authors/${author.id}`);
+	} catch (error) {
+		if (author == null) {
+			// Author Record NOT FOUND
+			res.render('/');
+		} else {
+			// Problem Updating Author Record
+			res.render('authors/edit', {
+				author       : author,
+				errorMessage : 'Error Updating Author'
+			});
+		}
+	}
+});
 
-	// // NOT NEEDED ANYMORE
-	// // res.send(author);
+// DELETE (DELETE): SINGLE AUTHOR ROUTE (/authors/##)
+router.delete('/:id', async (req, res) => {
+	let author;
+	try {
+		author = await Author.findById(req.params.id);
+		await author.remove();
+		res.redirect('/authors');
+	} catch (error) {
+		if (author == null) {
+			// Author Record NOT FOUND
+			res.redirect('/');
+		} else {
+			// Problem Deleting Author Record
+			res.redirect(`/authors/${author.id}`);
+		}
+	}
 });
 
 // Exporting the "router" object to be used by Application

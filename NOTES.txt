@@ -9,6 +9,11 @@ LOCAL-PC ==> GitHub Server ==> Heroku Server ==> MongoDB Server
 4. MongoDB Server: Non-SQL Database Server.
 
 **********************************************************************************
+IMPORTANT NOTE: In Routes "redirect" means to redirect to same ROUTE module and
+                "render" means to redirect to VIEW module.
+**********************************************************************************
+
+**********************************************************************************
 Project Setup - Node.js/Express/MongoDB Course #1:
 URL: "https://www.youtube.com/watch?v=qj2oDkvc4dQ"
 **********************************************************************************
@@ -228,10 +233,33 @@ In this video we will be improving the file upload process by:
     C. ==> git push
 04. Push new version of application to Heroku:
     A. ==> git push heroku master
+05. SPECIAL NOTE:
+    A. In Heroku server all uploaded images get deleted after dynos get restarted.
+       Now saving images in database in binary format, dynos issue has been fixed.
 
-
-
-
-
-
+**********************************************************************************
+Authors Show/Edit/Update/Delete Routes - Node.js/Express/MongoDB Course #5
+URL: "https://www.youtube.com/watch?v=UIf1Lh9OZ-k&list=PLZlA0Gpn_vH8jbFkBjOuFjhxANC63OmXM&index=10&t=0s"
+**********************************************************************************
+In this video we will be setting up the author's Show/Edit/Update/Delete routes. To do this 
+we will need to:
+1. Add routes to the author's controller
+2. Add views for the author's views
+3. Add data validation checks for deletion
+4. Create a delete form
+5. Interact with our database to update and delete authors
+6. Finish the navigation for authors in our views
+**********************************************************************************
+01. Install "method-override" Package:
+    A. ==> npm install method-override
+       I. Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't 
+          support it.
+    B. ==> Add reference in "server.js"
+02. Commit Changes to GitHub (Might need to sign in to GitHub account):
+    A. ==> 'git add .'
+    B. ==> git commit -m "Finished Author Routes"
+    C. ==> git push
+03. Push new version of application to Heroku:
+    A. ==> git push heroku master
+          
 

@@ -16,6 +16,8 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 // Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 const bodyParser = require('body-parser');
+// Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
+const methodOverride = require('method-override');
 
 // REFERENCING ROUTERS
 // Referencing DEFAULT Routes
@@ -44,6 +46,9 @@ app.use(
 		extended : false
 	})
 );
+// Instructing Express Application to USE "method-override" Package for REQUESTS.
+// such as PUT or DELETE.
+app.use(methodOverride('_method'));
 
 // Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.
 // Mongoose supports both promises and callbacks.
