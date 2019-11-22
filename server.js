@@ -38,7 +38,8 @@ app.set('layout', 'layouts/layout');
 // Instructing Express Application to USE "express-ejs-layouts" Package for Layouts
 app.use(expressLayouts);
 // Instructing Express Application to USE the Defined Location of All Public Files
-app.use(express.static('public'));
+// app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 // Instructing Express Application to USE the "body-parser" Package to Parse ALL REQUESTS
 app.use(
 	bodyParser.urlencoded({

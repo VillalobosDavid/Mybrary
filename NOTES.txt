@@ -280,3 +280,23 @@ Show/Edit/Update/Delete routes. To do this we will need to:
     C. ==> git push
 02. Push new version of application to Heroku:
     A. ==> git push heroku master
+
+**********************************************************************************
+General CSS Styles - Node.js/Express/MongoDB Course #7
+URL: "https://www.youtube.com/watch?v=ToMlS8RjFiI"
+**********************************************************************************
+In this video we will be creating all of the base CSS styles for our entire application. 
+These styles will include
+1. Setting up our CSS structure
+2. Setting up our background and text colors
+3. Creating the header styles
+4. Creating the button styles
+5. Styling the page headers
+**********************************************************************************
+01. Using "https://transfonter.org/" an online @font-face generator
+02. Commit Changes to GitHub (Might need to sign in to GitHub account):
+    A. ==> 'git add .'
+    B. ==> git commit -m "Added General Styles"
+    C. ==> git push
+03. Push new version of application to Heroku:
+    A. ==> git push heroku master

@@ -73,8 +73,10 @@ router.post('/', async (req, res) => {
 		description : req.body.description
 	});
 
-	// Save image (BUFFER base64) and its type to database schema
-	saveCover(book, req.body.cover);
+	if (req.body.cover != null && req.body.cover !== '') {
+		// Save image (BUFFER base64) and its type to database schema
+		saveCover(book, req.body.cover);
+	}
 
 	try {
 		const newBook = await book.save();
