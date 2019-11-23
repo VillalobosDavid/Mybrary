@@ -300,3 +300,16 @@ These styles will include
     C. ==> git push
 03. Push new version of application to Heroku:
     A. ==> git push heroku master
+
+**********************************************************************************
+Form CSS Styles - Node.js/Express/MongoDB Course #8
+URL: "https://www.youtube.com/watch?v=iPKrpRpUOzQ"
+**********************************************************************************
+In this video we will be creating all of the form and file upload CSS styles for our 
+entire application. These styles will include
+1. Creating the basic input styles
+2. Setting up our overall form layout styles
+3. Styling the file upload element
+4. Overriding the default select box option styles
+5. Persisting these styles across the entire application
+**********************************************************************************
