@@ -59,11 +59,11 @@ In this video we will be setting up the base of our project by:
     A. ==> npm install mongoose
     B. IMPORTANT: URL for local Mongoose Database "127.0.0.1:27017"
 09. Install Dotenv Development Package:
-    "Dotenv" is a zero-dependency module that loads environment variables from a .env file into 
+    "Dotenv" is a zero-dependency module that loads environment variables from a ".env" file into 
     process.env. Storing configuration in the environment separate from code is based on The 
     Twelve-Factor App methodology.
     A. ==> npm install --save-dev dotenv
-    B. Create a ".env" file in ROOT Directory and create entrie(s).
+    B. Create a ".env" file in ROOT Directory and create entry(s).
        I. DATABASE_URL = "mongodb://127.0.0.1:27017/mybrary"
 10. Initialize Git Repository for Project:
     A. ==> git init (Create an empty Git repository or reinitialize an existing one)
@@ -313,3 +313,28 @@ entire application. These styles will include
 4. Overriding the default select box option styles
 5. Persisting these styles across the entire application
 **********************************************************************************
+01. Commit Changes to GitHub (Might need to sign in to GitHub account):
+    A. ==> 'git add .'
+    B. ==> git commit -m "Form Setup Styles"
+    C. ==> git push
+02. Push new version of application to Heroku:
+    A. ==> git push heroku master
+
+**********************************************************************************
+Finish Project - Node.js/Express/MongoDB Course #9
+URL: "https://www.youtube.com/watch?v=fagUbvlMjYQ"
+**********************************************************************************
+In this video we will be finishing the entire Mybrary application. To do this we need to:
+1. Finish styling our author search/show page
+2. Style the file upload box
+3. Style the book show page
+4. Create a partial for our book grids
+5. Clean up any remaining styles
+**********************************************************************************
+01. Commit Changes to GitHub (Might need to sign in to GitHub account):
+    A. ==> 'git add .'
+    B. ==> git commit -m "Finished Project"
+    C. ==> git push
+02. Push new version of application to Heroku:
+    A. ==> git push heroku master
+
