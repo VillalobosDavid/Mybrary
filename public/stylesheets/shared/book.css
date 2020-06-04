@@ -1,6 +1,7 @@
 :root {
 	--book-cover-width: 200px;
 	--book-cover-width-large: 325px;
+	/* Width value is 75% of the Height value */
 	--book-cover-aspect-ratio: 0.75;
 }
 
@@ -9,7 +10,9 @@
 	height: calc(var(--book-cover-width) / var(--book-cover-aspect-ratio));
 }
 
+/* NOTE "book-cover-large" gets called in conjunction with "book-cover" */
 .book-cover-large {
+	/* Replacing the value of "--book-cover-width", which will recalculate the "book-cover" values */
 	--book-cover-width: var(--book-cover-width-large);
 }
 
@@ -20,12 +23,16 @@
 	grid-template-columns: repeat(auto-fill, var(--book-cover-width));
 }
 
+/* NOTE "book-grid-large" gets called in conjunction with "book-grid" */
 .book-grid-large {
-	grid-template-columns: repeat(auto-fill, var(--book-cover-width-large));
+	/* Replacing the value of "--book-cover-width", which will recalculate the "book-grid" values */
+	--book-cover-width: var(--book-cover-width-large);
+	/* grid-template-columns: repeat(auto-fill, var(--book-cover-width-large)); */
 }
 
 .book-details {
-	display: flex;
+  /* "flex" display element side by side */
+  display: flex;
 }
 
 .book-details-label {
@@ -43,7 +50,7 @@
 	grid-template-columns: auto auto;
 }
 
-.book-detailS-button-grid {
+.book-details-button-grid {
 	display: grid;
 	justify-items: flex-start;
 	align-items: flex-start;

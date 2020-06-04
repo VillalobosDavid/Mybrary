@@ -6,19 +6,23 @@
 }
 
 .form-row {
+	/* "flex" display element side by side */
 	display: flex;
 	margin-bottom: .5rem;
 }
 
+/* ALIGNING THE ROW CONTENT TO THE RIGHT */
 .form-row-end {
 	justify-content: flex-end;
 }
 
 .form-item {
+	/* "flex" display element side by side */
 	display: flex;
+	/* "flex-direction" display element on top of each other (column format) */
 	flex-direction: column;
 	margin-left: 2rem;
-	/* GROW EQUALLY */
+	/* GROW EQUALLY (RESIZED AUTOMATICALLY) */
 	flex-grow: 1;
 	flex-basis: 0;
 }
@@ -27,8 +31,9 @@
 	margin-left: 0;
 }
 
+/* DO NOT WANT THE IMAGE COLUMN TO BE RESIZED AUTOMATICALLY */
 .form-item-no-grow {
-	/* DO NOT GROW */
+	/* DO NOT GROW (DO NOT RESIZED AUTOMATICALLY) */
 	flex-grow: 0;
 }
 

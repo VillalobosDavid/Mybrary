@@ -2,7 +2,7 @@
 // Mongoose supports both promises and callbacks.
 const mongoose = require('mongoose');
 
-// Database Schema for Books
+// Database Schema/Table for Books
 const bookSchema = new mongoose.Schema({
 	title          : {
 		type     : String,
@@ -35,7 +35,7 @@ const bookSchema = new mongoose.Schema({
 	author         : {
 		type     : mongoose.Schema.Types.ObjectId,
 		required : true,
-		ref      : 'Author'
+		ref      : 'Author' // Referencing the "Author" Schema/Table in Mongoose Database.
 	}
 });
 

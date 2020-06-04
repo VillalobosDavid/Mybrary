@@ -1,11 +1,12 @@
-@import 'shared/variables.css';
+@import './shared/variables.css';
 @import './shared/fonts.css';
-@import 'shared/header.css';
-@import 'shared/buttons.css';
-@import 'shared/form.css';
-@import 'shared/author.css';
-@import 'shared/book.css';
+@import './shared/header.css';
+@import './shared/buttons.css';
+@import './shared/form.css';
+@import './shared/author.css';
+@import './shared/book.css';
 
+/* Defining the default "font-family" for entire website */
 :root {
 	font-family: 'Gotham Rounded';
 	font-size: 20px;
@@ -18,13 +19,14 @@
 	box-sizing: border-box;
 }
 
+/* Applying a gradient color to background */
 body {
 	background: linear-gradient(to right, var(--color-background-dark), var(--color-background-light));
 }
 
 .container {
 	max-width: 1200px;
-	margin: auto;
+	margin: auto; 
 	margin-bottom: 3rem;
 }
 

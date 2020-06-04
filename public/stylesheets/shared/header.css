@@ -12,6 +12,7 @@
 }
 
 .header-nav {
+  /* "flex" display element side by side */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -20,6 +21,7 @@
 }
 
 .header-nav ul {
+  /* "flex" display element side by side */
   display: flex;
   margin: 0;
   padding: 0;

@@ -1,11 +1,12 @@
-// Development: "DATABASE_URL" comes from ".env" file and database is pointing to local database.
-// Production (Heroku): "DATABASE_URL" comes from server's configuration variables and database
-//                      is pointing to MongoDB database.
+// Development:         "DATABASE_URL" comes from ".env" file and the database is pointing to 
+//                      local database server.
+// Production (Heroku): "DATABASE_URL" comes from server's configuration variables and the database
+//                      is pointing to MongoDB database server.
 if (process.env.NODE_ENV !== 'production') {
 	// NOT WORKING...
 	// require('dotenv').parse();
 
-	// Needed to access variables in ".env" file
+	// If running in development mode.  Needed to access variables in ".env" file
 	require('dotenv').config();
 }
 // console.log('process.env.DATABASE_URL: ' + process.env.DATABASE_URL);
@@ -38,8 +39,8 @@ app.set('layout', 'layouts/layout');
 // Instructing Express Application to USE "express-ejs-layouts" Package for Layouts
 app.use(expressLayouts);
 // Instructing Express Application to USE the Defined Location of All Public Files
-// app.use(express.static('public'));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
+// app.use(express.static(__dirname + '/public'));
 // Instructing Express Application to USE the "body-parser" Package to Parse ALL REQUESTS
 app.use(
 	bodyParser.urlencoded({
@@ -62,7 +63,7 @@ mongoose.connect(process.env.DATABASE_URL, {
 const db = mongoose.connection;
 // ERROR Event Listener
 db.on('error', (error) => {
-	console.error(error);
+	console.error('ERROR: ', error);
 });
 // SUCCESS Event Listener, called only once when Database has been opened.
 db.once('open', () => {
@@ -79,4 +80,7 @@ app.use('/books', booksRouter);
 // Starting Server and Defining Listening Port
 // "process.env.PORT" for Production
 // "3000" for Development
-app.listen(process.env.PORT || 3000);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT);
+console.log(`URL: http://localhost:${PORT}`);
+

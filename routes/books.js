@@ -7,7 +7,7 @@ const Author = require('../models/author');
 const Book = require('../models/book');
 
 // Type of image files accepted by upload
-const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+const imageMimeTypes = [ 'image/jpeg', 'image/png', 'image/gif' ];
 
 // GET (RETRIEVE): ALL BOOKS ROUTE (/books)
 router.get('/', async (req, res) => {
@@ -27,8 +27,8 @@ router.get('/', async (req, res) => {
 		// Execute the modified query
 		const books = await query.exec();
 		res.render('books/index', {
-			books         : books,
-			searchOptions : req.query
+			books: books,
+			searchOptions: req.query
 		});
 	} catch (error) {
 		res.redirect('/');
@@ -37,16 +37,17 @@ router.get('/', async (req, res) => {
 
 // GET (RETRIEVE): SINGLE BOOK ROUTE (/books/new)
 router.get('/new', async (req, res) => {
-	renderNewPage(res, new Book());
+	renderFormPage(res, new Book(), 'new');
 });
 
 // GET (RETRIEVE): SINGLE BOOK ROUTE (/books/##)
 router.get('/:id', async (req, res) => {
 	try {
 		// Get the Book record and populate Author record as well.
+		// "author" in "Book" Schema/Table contains the ID of the "Author" Schema/Table
 		const book = await Book.findById(req.params.id).populate('author').exec();
 		res.render('books/show', {
-			book : book
+			book: book
 		});
 	} catch (error) {
 		res.redirect('/');
@@ -57,7 +58,7 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/edit', async (req, res) => {
 	try {
 		const book = await Book.findById(req.params.id);
-		renderEditPage(res, book);
+		renderFormPage(res, book, 'edit');
 	} catch (error) {
 		res.redirect('/');
 	}
@@ -66,11 +67,11 @@ router.get('/:id/edit', async (req, res) => {
 // POST (CREATE): CREATE NEW BOOKS ROUTE (/books)
 router.post('/', async (req, res) => {
 	const book = new Book({
-		title       : req.body.title,
-		author      : req.body.author,
-		publishDate : new Date(req.body.publishDate),
-		pageCount   : req.body.pageCount,
-		description : req.body.description
+		title: req.body.title,
+		author: req.body.author,
+		publishDate: new Date(req.body.publishDate),
+		pageCount: req.body.pageCount,
+		description: req.body.description
 	});
 
 	if (req.body.cover != null && req.body.cover !== '') {
@@ -82,7 +83,8 @@ router.post('/', async (req, res) => {
 		const newBook = await book.save();
 		res.redirect(`/books/${newBook.id}`);
 	} catch (error) {
-		renderNewPage(res, book, true);
+		renderFormPage(res, book, 'new', true);
+
 	}
 });
 
@@ -98,7 +100,7 @@ router.put('/:id', async (req, res) => {
 		book.description = req.body.description;
 
 		if (req.body.cover != null && req.body.cover !== '') {
-			// Save image (BUFFER base64) and its type to database schema
+			// Save image (BUFFER base64) and its type to "Book" Schema/Table
 			saveCover(book, req.body.cover);
 		}
 
@@ -106,7 +108,7 @@ router.put('/:id', async (req, res) => {
 		res.redirect(`/books/${book.id}`);
 	} catch (error) {
 		if (book != null) {
-			renderEditPage(res, book, true);
+			renderFormPage(res, book, 'edit', true);
 		} else {
 			redirect('/');
 		}
@@ -127,33 +129,26 @@ router.delete('/:id', async (req, res) => {
 		} else {
 			// Problem Deleting Book Record
 			res.render('books/show', {
-				book         : book,
-				errorMessage : 'Could NOT remove book'
+				book: book,
+				errorMessage: 'Could NOT remove book'
 			});
 		}
 	}
 });
 
-async function renderNewPage(res, book, hasError = false) {
-	renderFormPage(res, book, 'new', hasError);
-}
-
-async function renderEditPage(res, book, hasError = false) {
-	renderFormPage(res, book, 'edit', hasError);
-}
-
 async function renderFormPage(res, book, form, hasError = false) {
 	try {
 		const authors = await Author.find({});
 		const params = {
-			authors : authors,
-			book    : book
+			authors: authors,
+			book: book
 		};
 
 		if (hasError) {
 			if (form === 'edit') {
 				params.errorMessage = 'Error Updating Book';
 			} else {
+				// 'new'
 				params.errorMessage = 'Error Creating Book';
 			}
 		}

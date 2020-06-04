@@ -3,21 +3,32 @@
 <div class="book-details">
     <div>
         <img class="book-cover" src="<%= book.coverImagePath %>" alt="Book Cover">
-        <div class="book-detailS-button-grid">
+        <!-- "book-details-button-grid": TWO COLUMN GRID -->
+        <div class="book-details-button-grid">
+            <!-- ROW ONE, COLUMN ONE -->
             <a class="btn btn-primary" href="/books/<%= book.id %>/edit">Edit</a>
+
+            <!-- ROW ONE, COLUMN TWO -->
             <!-- Passing the "url" parameter to partial view "deleteForm" -->
             <%- include('../partials/deleteForm', {url: `/books/${book.id}` }) %>
+
+            <!-- ROW TWO, COLUMN ONE AND TWO -->
             <a class="btn btn-primary book-details-author-button" href="/authors/<%= book.author.id %>">View Author</a>
         </div>
     </div>
 
+    <!-- "book-details-grid": TWO COLUMN GRID -->
     <div class="book-details-grid">
+        <!-- ROW ONE -->
         <div class="book-details-label">Author: </div>
         <div><%= book.author.name %></div>
+        <!-- ROW TWO -->
         <div class="book-details-label">Published Date: </div>
         <div><%= book.publishDate.toDateString() %></div>
+        <!-- ROW THREE -->
         <div class="book-details-label">Page Count: </div>
         <div><%= book.pageCount %></div>
+        <!-- ROW FOUR -->
         <div class="book-details-label">Description: </div>
         <div><%= book.description %></div>
     </div>

@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const Book = require('./book');
 
-// Database Schema for Authors
+// Database Schema/Table for "Authors"
 const authorSchema = new mongoose.Schema({
 	name : {
 		type     : String,
@@ -11,18 +11,19 @@ const authorSchema = new mongoose.Schema({
 	}
 });
 
-// Defines a pre hook for the document.  Making sure NOT to delete authors who have books in database
+// Defines a pre hook for the document.  Making sure NOT to delete authors who have books in the database
 // Using "function()" instead of "=>" arrow function because need reference to "this" object.
 authorSchema.pre('remove', function(next) {
 	Book.find({ author: this.id }, (error, books) => {
 		if (error) {
-			// Internal error with mongoose
+			// Internal error with mongoose, passing error to callback
 			next(error);
 		} else if (books.length > 0) {
-			// Author has book(s) in the database, Author CAN NOT be deleted.
-			next(new Error('This author has books still'));
+			// Author has book(s) in the database, Author CAN NOT be deleted.  Passing message to callback.
+			next(new Error('Can not delete author.  There are book(s) associated with the author.'));
+			// console.log('Can not delete author.  There are book(s) associated with the author.');
 		} else {
-			// Author CAN be deleted.
+			// Author CAN be deleted.  Resuming execution of callback function.
 			next();
 		}
 	});

@@ -1,6 +1,7 @@
 How To Install Node.js:  https://youtu.be/VShtPwEkDD0
 How To Install MongoDB:  https://youtu.be/wcx3f0eUiAw
 Learn Git In 20 Minutes: https://youtu.be/IHaTbJPdB-s
+YouTube Playlist       : https://www.youtube.com/playlist?list=PLZlA0Gpn_vH8jbFkBjOuFjhxANC63OmXM
 
 LOCAL-PC ==> GitHub Server ==> Heroku Server ==> MongoDB Server
 1. LOCAL-PC:       Development Environment.
@@ -25,12 +26,15 @@ In this video we will be setting up the base of our project by:
 5. Setting up our MVC folder structure
 **********************************************************************************
 01. Initialize Project:
-    A. ==> init npm
+    A. ==> init npm -y
+       I. "-y" parameter will respond all parameters with "yes".
 02. Install Required Packages:
     A. ==> npm install express              (server)
        I. Fast, un-opinionated, minimalist web framework for node.
     B. ==> npm install ejs                  (template language)
-       I. Embedded JavaScript templates.
+       I.  Embedded JavaScript templates.
+       II. Also install "EJS language support" extension.  Syntax highlighting for EJS, Javascript, 
+           and HTML tags. Includes javascript autocompletion.
     C. ==> npm install express-ejs-layouts  (for creating HTML Layouts)
        I. Layout support for "ejs" (Embedded JavaScript templates) in express.
 03. Install Development Packages:
@@ -38,8 +42,8 @@ In this video we will be setting up the base of our project by:
        I. "nodemon" is a tool that helps develop node.js based applications by automatically 
           restarting the node application when file changes in the directory are detected.
 04. Modify "package.json" to create scripts to run servers:
-    A."start": "node server.js"             (for Production Running)
-    B."devStart": "nodemon server.js"       (for Development Running)
+    A. "start": "node server.js"            (for Production Running)
+    B. "devStart": "nodemon server.js"      (for Development Running)
 05. Running server:
     A. ==> npm run start                    (for Production Running)
     B. ==> npm run devStart                 (for Development Running)
@@ -58,7 +62,7 @@ In this video we will be setting up the base of our project by:
     Mongoose supports both promises and callbacks.
     A. ==> npm install mongoose
     B. IMPORTANT: URL for local Mongoose Database "127.0.0.1:27017"
-09. Install Dotenv Development Package:
+09. Install "Dotenv" Development Package:
     "Dotenv" is a zero-dependency module that loads environment variables from a ".env" file into 
     process.env. Storing configuration in the environment separate from code is based on The 
     Twelve-Factor App methodology.
@@ -66,15 +70,22 @@ In this video we will be setting up the base of our project by:
     B. Create a ".env" file in ROOT Directory and create entry(s).
        I. DATABASE_URL = "mongodb://127.0.0.1:27017/mybrary"
 10. Initialize Git Repository for Project:
-    A. ==> git init (Create an empty Git repository or reinitialize an existing one)
-    B. Create a ".gitignore" file to declare all files and directories that DO NOT want be 
-       included when saving project to repository.
-    C. ==> 'git add .' (Add file contents to the index)
-    D. ==> git commit -m "Commit-Comment" (Record changes to the repository)
-    E. Go to GitHub and create a new repository for the project, call it "Mybrary".
+    A. ==> git init 
+       I. Create an empty Git repository or reinitialize an existing one.
+    B. Create a ".gitignore" file in the ROOT directory to declare all files and directories 
+       that DO NOT want be included when saving project to repository.
+    C. ==> 'git add .' 
+       I. Add file contents to the repository. Make sure to include " ." in the command.
+    D. ==> git commit -m "Commit-Comment" 
+       I. Record changes to the repository.
+    E. Go to GitHub and create a new repository for the project, called it "Mybrary".
+       I.  Save the URL given by the "clone or download" option of the repository.
+       II. URL: "https://github.com/VillalobosDavid/Mybrary.git"
     D. Push an existing repository from the command line
        ==> git remote add origin https://github.com/VillalobosDavid/Mybrary.git
+       I. Specifying the remote location in GitHub of the local repository.   
        ==> git push -u origin master
+       I. Uploading the project to GitHub remote repository.
 10. Creating and Uploading Project to Heroku:
     A. Create New App in Heroku website
        I. Called it "mybrary-dv"
@@ -82,32 +93,37 @@ In this video we will be setting up the base of our project by:
        I. URL: https://devcenter.heroku.com/articles/heroku-cli#download-and-install
     C. log in to your Heroku account and follow the prompts to create a new SSH public key.
        I.   ==> heroku login
-    D. Create a new Git repository (If Necessary)
+    D. Create a new Git repository in Heroku server (If Necessary)
        I.   ==> cd my-project/                      (DONE IN STEP 10)
        II.  ==> git init                            (DONE IN STEP 10)
        III. ==> heroku git:remote -a mybrary-dv
-    E. Deploy your application
+    E. Deploy the application to Heroku server
        I.   ==> 'git add .'                         (DONE IN STEP 10)
        II.  ==> git commit -am "make it better"     (DONE IN STEP 10)
        III. ==> git push heroku master
-    F. Existing Git repository (For existing repositories, simply add the heroku remote)
+    F. Existing Git repository.  For existing repositories, simply issue the heroku "remote"
+       command and deploy the application to Heroku server.
        I.   ==> heroku git:remote -a mybrary-dv
        II.  ==> git push heroku master
-    G. Create Configuration Variables in ".env" in Heroku:
+    G. Create Configuration Variables in ".env" in Heroku server:
        I. Access Application Setting and add necessary variables.
           a. KEY:   DATABASE_URL
-          b. VALUE: Value generated by step 11.B.II.
+          b. VALUE: Value generated by step 11.B.II (NEXT STEP).
     H. Application Production URL in Heroku (CAN BE FOUND IN SETTINGS SECTION):
        I. URL: "https://mybrary-dv.herokuapp.com/"
 11. Creating a Cluster (Database) using mongoDB to be used by Heroku Production Application:
     A. Access URL "https://cloud.mongodb.com/user#/atlas/login" and login.
     B. Leave all options as they are and hit "Create"
-       I.  After Cluster has been created click on "Connect" button in order to Create a 
-           MongoDB User.  Save the user-name and password, will need them in following step.
-       II. Click on "Choose a connection method" and select "Connect Your Application" which
-           should provide a connection string for the MongoDB Cluster.
+       I.  After Cluster/Database has been created click on "Connect" or "Database Access"  button 
+           in order to Create a MongoDB User.  Save the <user> and <password>, will need them in 
+           following step.
+       II. Click "Connect" -> "Choose a connection method" and select "Connect Your Application" which
+           should provide a template connection string for the MongoDB Cluster/Database.
            a. EX: mongodb+srv://user:<password>@cluster0-7hkfw.mongodb.net/test?retryWrites=true&w=majority
-           b. Replace "<password>" with the password created in previous step.
+              1. "user"      : The name given to the <user>. Automatically filled in by Heroku.
+              2. "<password>": The password given to the <user> account.
+           b. Replace "<password>" with the password for the user, "user", and ensure all special 
+              characters are URL encoded.
 
 **********************************************************************************
 Author's Index/Create/New Routes - Node.js/Express/MongoDB Course #2
@@ -141,9 +157,11 @@ we will need to:
 05. Whitelist your connection IP address in MongoDB website
     A. Access "Network Access" for database
     B. Add an IP Address 
-       I. 0.0.0/0 (Opened to all IP Addresses)
-06. Restart all dynos in Heroku server:
+       I. 0.0.0.0/0 (Opened to all IP Addresses)
+06. Restart all "dynos" in Heroku server:
     A. Access "More" ==> "Restart all dynos"
+    B. Terminology: "Dynos" are isolated, virtualized Unix containers, that provide the 
+                    environment required to run an application.
 
 **********************************************************************************
 Books Index/Create/New Routes - Node.js/Express/MongoDB Course #3
@@ -170,6 +188,7 @@ we will need to:
        I. Multer is a node.js middleware for handling multipart/form-data, which is primarily 
           used for uploading files. It is written on top of busboy for maximum efficiency.
           NOTE: Multer will not process any form which is not multipart (multipart/form-data).
+          1. EX: <form action="/books" method="POST" enctype="multipart/form-data"> 
 03. Commit Changes to GitHub (Might need to sign in to GitHub account):
     A. ==> 'git add .'
     B. ==> git commit -m "Books Create/Index/New"
@@ -177,7 +196,7 @@ we will need to:
 04. Push new version of application to Heroku:
     A. ==> git push heroku master
 05. SPECIAL NOTE:
-    A. In Heroku server all uploaded images get deleted after dynos get restarted.
+    A. In Heroku server all uploaded images get deleted after "dynos" get restarted.
        In following tutorial will address and fix the issue.
 
 **********************************************************************************
@@ -234,8 +253,8 @@ In this video we will be improving the file upload process by:
 04. Push new version of application to Heroku:
     A. ==> git push heroku master
 05. SPECIAL NOTE:
-    A. In Heroku server all uploaded images get deleted after dynos get restarted.
-       Now saving images in database in binary format, dynos issue has been fixed.
+    A. In Heroku server all uploaded images get deleted after "dynos" get restarted.
+       Now saving images in database in binary format, "dynos" issue has been fixed.
 
 **********************************************************************************
 Authors Show/Edit/Update/Delete Routes - Node.js/Express/MongoDB Course #5
@@ -293,12 +312,20 @@ These styles will include
 4. Creating the button styles
 5. Styling the page headers
 **********************************************************************************
-01. Using "https://transfonter.org/" an online @font-face generator
-02. Commit Changes to GitHub (Might need to sign in to GitHub account):
+01. Using TRANSFONTER, A modern and simple css @font-face generator ("https://transfonter.org/"):
+    A. Follow instructions in website on how to generate the font files and the requires css file.  
+    B. Created folder "public/fonts" and placed the font files, generated by TRANSFONTER, in this folder.
+    C. Created folder "public/stylesheets/shared" and placed in the folder "stylesheets.css" file,
+       generated by TRANSFONTER, and renamed it "fonts.css".
+       I. Modified the URL path of the font location to include the "fonts" folder.  The location
+          folder where all the font files were placed.
+02. Create "public/stylesheets/main.css" file and add reference to "/views/layouts/layout.ejs" file.
+    This is the main css file where all the other css files will get imported to.
+03. Commit Changes to GitHub (Might need to sign in to GitHub account):
     A. ==> 'git add .'
     B. ==> git commit -m "Added General Styles"
     C. ==> git push
-03. Push new version of application to Heroku:
+04. Push new version of application to Heroku:
     A. ==> git push heroku master
 
 **********************************************************************************

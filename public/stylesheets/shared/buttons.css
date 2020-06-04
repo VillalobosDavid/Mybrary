@@ -1,13 +1,21 @@
 :root {
-	--color-btn-primary-background: hsl(var(--color-base-hue), 100%, 83%);
-	--color-btn-primary-background-dark: hsl(var(--color-base-hue), 100%, 73%);
+	/* PRIMARY REGULAR */
 	--color-btn-primary-text: hsl(var(--color-base-hue), 100%, 20%);
+	--color-btn-primary-background: hsl(var(--color-base-hue), 100%, 83%);
+	
+	/* PRIMARY HOVER */
 	--color-btn-primary-text-dark: hsl(var(--color-base-hue), 100%, 10%);
-	--color-btn-border: black;
-	--color-btn-danger-background: hsl(var(--color-danger-hue), 100%, 83%);
-	--color-btn-danger-background-dark: hsl(var(--color-danger-hue), 100%, 73%);
+	--color-btn-primary-background-dark: hsl(var(--color-base-hue), 100%, 73%);
+	
+	/* DANGER REGULAR */
 	--color-btn-danger-text: black;
+	--color-btn-danger-background: hsl(var(--color-danger-hue), 100%, 83%);
+	
+	/* DANGER HOVER */
 	--color-btn-danger-text-dark: black;
+	--color-btn-danger-background-dark: hsl(var(--color-danger-hue), 100%, 73%);
+	
+	--color-btn-border: black;
 }
 
 .btn {
@@ -26,10 +34,12 @@
 	align-items: flex-start;
 }
 
+/* Spacing ALL child elements "> *" to "btn-row" class */
 .btn-row > * {
 	margin-left: 1rem;
 }
 
+/* Removing spacing from first-child elements "> *:first-child" of "btn-row" class */
 .btn-row > *:first-child {
 	margin-left: 0;
 }

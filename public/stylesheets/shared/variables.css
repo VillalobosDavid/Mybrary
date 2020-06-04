@@ -1,10 +1,22 @@
 :root {
+	/* "hsl" stands for "hue", "saturation", and "lightness". */
+	/* "hue" color range value is from 1 to 360 */
+	/* NOTE: By changing the value of "--color-base-hue" variable, all the colors used by elements  */
+	/*       in the website will be affected.  Changing website colors at will. */
 	--color-base-hue: 200;
+
 	/* "hue" Color value can equal from 1 to 360, taking half of tme maximum value */
 	--color-danger-hue-offset: 180;
+
 	/* Calculating the opposite of the "--color-base-hue" value */
 	--color-danger-hue: calc(var(--color-base-hue) - var(--color-danger-hue-offset));
+
+	/* "lightness" = 8%, MAKING COLOR DARK */
 	--color-background-dark: hsl(var(--color-base-hue), 100%, 8%);
-	--color-background-light: hsl(var(--color-base-hue), 100%, 16%);
-	--color-text-light: hsl(var(--color-base-hue), 100%, 87%);
+
+	/* "lightness" = 16% or 25%, MAKING COLOR LIGHTER */
+	--color-background-light: hsl(var(--color-base-hue), 100%, 25%);
+
+	/* "lightness" = 80%, MAKING COLOR EXTRA LIGHT */
+	--color-text-light: hsl(var(--color-base-hue), 100%, 80%);
 }
