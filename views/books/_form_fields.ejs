@@ -36,15 +36,16 @@
         <label for="cover">Cover</label>
         <!-- Added class "filepond" in order for element to get recognized by "FilePond" -->
         <input type="file" name="cover" id="cover" class="book-cover filepond">
+        <!-- If book has a Current Image, display it. -->
+        <% if (book.coverImage != null && book.coverImage !== '') { %>
+            <br>
+            <label for="current-cover">Current Cover</label>
+            <img class="book-cover" name="current-cover" src="<%= book.coverImagePath %>" alt="Book Cover">
+        <% } %>
     </div>
     <div class="form-item">
         <label for="description">Description</label>
         <textarea name="description" id="description"><%= book.description %></textarea>
     </div>
 </div>
-
-<!-- <% if (book.coverImage != null && book.coverImage !== '') { %>
-    <input type="file" name="cover" id="cover" class="book-cover filepond" src="<%= book.coverImagePath %>">
-<% } else { %>
-    <input type="file" name="cover" id="cover" class="book-cover filepond">
-<% } %> -->
+  
